@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from "react-router-dom"
+import Home from './pages/home/home.component';
+import Movie from './pages/movie-detail/movie-detail.component';
+import Header from './components/header/header.component';
+import MovieList from './components/movie-list/movie-list.component';
+import { useState } from 'react';
+
 
 function App() {
+  const [toggle, setToggle] = useState(true);
+  const getColor = (colorPicker) => {
+    return colorPicker ^ toggle ? "black" : "white";
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ backgroundColor: getColor(true), color: getColor(false) }}>
+      <Header setToggle={setToggle} toggle={toggle} />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="movie/:id" element={<Movie />} />
+        <Route path="movies/:type" element={<MovieList />} />
+        <Route path="/*" element={<h1>Error Page</h1>} />
+      </Routes>
     </div>
   );
 }
