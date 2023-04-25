@@ -19,7 +19,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="movie/:id" element={<Movie />} />
         <Route path="movies/:type" element={<MovieList />} />
-        <Route path="/*" element={<h1>Error Page</h1>} />
+        <Route path="/*" element={<Home />} />
       </Routes>
     </div>
   );
